@@ -1,6 +1,6 @@
 # Project Oubliette
 
-![Status](https://img.shields.io/badge/Status-Research_Prototype-blue)
+![Status](https://img.shields.io/badge/Status-Research_Prototype-red)
 ![License](https://img.shields.io/badge/License-GPLv3-blue)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-yellow)
 
