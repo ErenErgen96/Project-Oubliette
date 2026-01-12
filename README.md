@@ -6,6 +6,11 @@
 
 **A Zero-Trust Endpoint Data Protection & Remote Key Management System.**
 
+# 🚨 Pre-Alpha
+# Early development phase. Core concepts are being explored; a working prototype is not yet available.
+
+
+
 ---
 
 ## 📖 Project Overview
