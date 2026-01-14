@@ -10,7 +10,6 @@ import uvicorn
 try:
     import config
 except ImportError:
-    # Config dosyası yoksa varsayılan değerler (Test için)
     class Config:
         DB_NAME = "secure_keystore.sqlite"
         KMS_SERVER_URL = "http://127.0.0.1:8001"
@@ -30,8 +29,7 @@ def init_db():
     conn = sqlite3.connect(config.DB_NAME)
     c = conn.cursor()
     
-    # Tablo adı: 'vaults' -> 'secure_containers' (Daha havalı)
-    # panic_passwords -> duress_tokens
+    
     c.execute('''CREATE TABLE IF NOT EXISTS secure_containers 
                  (vault_id TEXT PRIMARY KEY, 
                   real_password TEXT, 
@@ -49,7 +47,7 @@ init_db()
 class VaultCreate(BaseModel):
     vault_id: str
     real_password: str
-    duress_tokens: list[str]  # 'panic_passwords' yerine Kurumsal isim
+    duress_tokens: list[str] 
 
 class VaultAccess(BaseModel):
     vault_id: str
@@ -114,8 +112,7 @@ def access_vault(data: VaultAccess):
         conn.commit()
         conn.close()
         
-        # 2. GENERATE DECOY KEY (Tuzak Anahtar)
-        # Saldırganın şifre çözmeye çalıştığını sanması için rastgele byte gönderiyoruz.
+        # 2. GENERATE DECOY KEY 
         decoy_key = secrets.token_bytes(32)
         
         return {
@@ -150,4 +147,5 @@ if __name__ == "__main__":
         pass
         
     print(f"[*] Oubliette Enterprise KMS running on port {port}...")
+
     uvicorn.run(app, host="127.0.0.1", port=port)
